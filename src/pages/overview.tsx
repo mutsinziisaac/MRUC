@@ -23,8 +23,8 @@ export default function Overview() {
         <KpiCard label="Open Alerts" value={String(kpis.openAlerts)} delta={-2} deltaLabel="vs last week" icon={AlertTriangle} />
       </section>
 
-      {/* Revenue vs Target + Corridor Performance */}
-      <section className="animate-in-section grid gap-4 lg:grid-cols-2" style={{ animationDelay: "0.1s" }}>
+      {/* Revenue vs Target */}
+      <section className="animate-in-section" style={{ animationDelay: "0.1s" }}>
         <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
           <SectionHeader title="Revenue vs Target" description="Monthly actual collections against target (MZN)" />
           <AreaChart data={monthlyRevenue}>
@@ -32,15 +32,6 @@ export default function Overview() {
             <Area type="monotone" dataKey="actual" stroke={COLORS.primary} fill={COLORS.primary} fillOpacity={0.1} name="Actual" />
             <Legend iconSize={8} wrapperStyle={{ fontSize: 11 }} />
           </AreaChart>
-        </div>
-
-        <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-          <SectionHeader title="Corridor Performance" description="Collections by corridor (MZN)" />
-          <BarChart data={corridorPerformance.map((c) => ({ name: c.name, Collected: c.collected, Target: c.target }))} layout="vertical" height={260}>
-            <Bar dataKey="Target" fill={COLORS.muted} radius={[0, 2, 2, 0]} barSize={10} name="Target" />
-            <Bar dataKey="Collected" fill={COLORS.primary} radius={[0, 2, 2, 0]} barSize={10} name="Collected" />
-            <Legend iconSize={8} wrapperStyle={{ fontSize: 11 }} />
-          </BarChart>
         </div>
       </section>
 

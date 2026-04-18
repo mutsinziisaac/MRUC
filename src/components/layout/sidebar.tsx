@@ -4,6 +4,10 @@ import {
   TrendingUp,
   ShieldCheck,
   Activity,
+  Map,
+  Route,
+  Truck,
+  Landmark,
   Settings,
   Bell,
 } from "lucide-react"
@@ -14,7 +18,11 @@ const navItems = [
   { to: "/revenue", label: "Revenue Analytics", icon: TrendingUp },
   { to: "/compliance", label: "Compliance & Enforcement", icon: ShieldCheck },
   { to: "/operations", label: "Operations Health", icon: Activity },
-  { to: "/configuration", label: "Government Configuration", icon: Settings },
+  { to: "/geo-map", label: "Geo Map & Toll Config", icon: Map },
+  { to: "/transit", label: "Transit Management", icon: Route },
+  { to: "/vehicles", label: "Vehicle Registry", icon: Truck },
+  { to: "/reconciliation", label: "Financial Reconciliation", icon: Landmark },
+  { to: "/configuration", label: "Configuration", icon: Settings },
   { to: "/alerts", label: "Alerts & Audit Trail", icon: Bell },
 ]
 
@@ -24,18 +32,13 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full flex-col">
       {/* Branding */}
-      <div className="flex items-center gap-3 px-5 py-5">
-        <div className="flex size-9 items-center justify-center rounded-lg bg-sidebar-primary font-bold text-sidebar-primary-foreground text-sm">
-          MR
-        </div>
-        <div>
+      <div className="px-5 py-5">
           <div className="font-semibold text-sm text-sidebar-foreground leading-tight">
-            Maputo MRUC
+            MRUC
           </div>
           <div className="text-[11px] text-sidebar-foreground/60 leading-tight">
-            Road Revenue Admin
+            Unified Road Revenue Platform
           </div>
-        </div>
       </div>
 
       {/* Navigation */}
