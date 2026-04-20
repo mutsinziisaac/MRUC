@@ -21,10 +21,6 @@ const sparkEfficiency = [91.5, 92.8, 91.2, 93.4, 92.1, 93.8, 92.5, 94.0, 93.2, 9
 const sparkCompliance = [88.5, 89.2, 90.5, 89.8, 91.2, 92.4, 91.8, 90.6, 92.1, 93.0, 92.5, 91.7]
 const sparkUptime = [99.85, 99.92, 99.78, 99.95, 99.70, 99.88, 99.93, 99.65, 99.91, 99.95, 99.82, 99.87]
 
-const ranked = [...corridorPerformance].sort((a, b) => b.collected / b.target - a.collected / a.target)
-const topPerformers = ranked.slice(0, 3)
-const needsAttention = [...ranked].slice(-3)
-
 const totalChannelAmount = channelMix.reduce((s, c) => s + c.amount, 0)
 const dominantChannel = [...channelMix].sort((a, b) => b.value - a.value)[0]
 
@@ -60,13 +56,6 @@ function fmtUGXSplit(v: number): { value: string; unit: string } {
   if (v >= 1e6) return { value: `${(v / 1e6).toFixed(1)}M`, unit: "UGX" }
   if (v >= 1e3) return { value: `${(v / 1e3).toFixed(0)}K`, unit: "UGX" }
   return { value: v.toLocaleString(), unit: "UGX" }
-}
-
-function pctTone(pct: number) {
-  if (pct >= 100) return { pill: "bg-emerald-50 text-emerald-700 ring-emerald-200", bar: "bg-emerald-600" }
-  if (pct >= 90)  return { pill: "bg-emerald-50 text-emerald-700 ring-emerald-200", bar: "bg-emerald-500" }
-  if (pct >= 75)  return { pill: "bg-amber-50 text-amber-700 ring-amber-200",       bar: "bg-amber-500" }
-  return            { pill: "bg-rose-50 text-rose-700 ring-rose-200",                bar: "bg-rose-500" }
 }
 
 function timeAgo(idx: number): string {
@@ -328,22 +317,6 @@ export default function Overview() {
         </div>
       </section>
 
-      {/* Top Performers + Needs Attention */}
-      <section className="animate-in-section grid gap-5 lg:grid-cols-2" style={{ animationDelay: "0.12s" }}>
-        <CorridorList
-          title="Top-Performing Corridors"
-          description="Highest collection-to-target ratio"
-          items={topPerformers}
-          variant="positive"
-        />
-        <CorridorList
-          title="Needs Attention"
-          description="Corridors below target or in enforcement focus"
-          items={needsAttention}
-          variant="negative"
-        />
-      </section>
-
       {/* Key Alerts + Recent Government Actions */}
       <section className="animate-in-section grid gap-5 lg:grid-cols-2" style={{ animationDelay: "0.18s" }}>
         {/* Key Alerts */}
@@ -419,69 +392,6 @@ export default function Overview() {
           <SummaryStat label="Forecast · Month-End"  value={`${monthEnd.value} ${monthEnd.unit}`} sub={`On track · ${ytdPct.toFixed(1)}% of target`} tone="positive" />
         </div>
       </section>
-    </div>
-  )
-}
-
-// ─── Corridor list ─────────────────────────────────────────────────────────
-function CorridorList({
-  title,
-  description,
-  items,
-  variant,
-}: {
-  title: string
-  description: string
-  items: typeof corridorPerformance
-  variant: "positive" | "negative"
-}) {
-  return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card">
-      <div className="border-b border-border px-5 py-4">
-        <h2 className="text-base font-semibold tracking-tight">{title}</h2>
-        <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
-      </div>
-      <ul className="divide-y divide-border">
-        {items.map((c) => {
-          const pct = Math.round((c.collected / c.target) * 100)
-          const tone = pctTone(pct)
-          const shortfall = Math.max(0, c.target - c.collected)
-          return (
-            <li key={c.id} className="px-5 py-4">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="truncate text-sm font-semibold">{c.name}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">
-                    {c.district}
-                    {variant === "positive" ? (
-                      <>
-                        {" · "}
-                        {c.violations} violations
-                        {" · "}
-                        {c.compliance}% compliant
-                      </>
-                    ) : (
-                      <>
-                        {" · "}
-                        short {fmtUGX(shortfall)}
-                      </>
-                    )}
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold tabular-nums">{fmtUGX(c.collected)}</span>
-                  <span className={cn("rounded-md px-2 py-0.5 text-xs font-semibold ring-1", tone.pill)}>
-                    {pct}%
-                  </span>
-                </div>
-              </div>
-              <div className="mt-3 h-1 overflow-hidden rounded-full bg-muted">
-                <div className={cn("h-full rounded-full", tone.bar)} style={{ width: `${Math.min(pct, 100)}%` }} />
-              </div>
-            </li>
-          )
-        })}
-      </ul>
     </div>
   )
 }

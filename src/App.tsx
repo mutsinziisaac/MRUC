@@ -10,7 +10,6 @@ import Configuration from "@/pages/configuration"
 import Alerts from "@/pages/alerts"
 import GeoMap from "@/pages/geo-map"
 import Transit from "@/pages/transit"
-import Vehicles from "@/pages/vehicles"
 import Reconciliation from "@/pages/reconciliation"
 
 export default function App() {
@@ -28,7 +27,6 @@ export default function App() {
             <Route path="compliance" element={<Compliance />} />
             <Route path="geo-map" element={<GeoMap />} />
             <Route path="transit" element={<Transit />} />
-            <Route path="vehicles" element={<Vehicles />} />
             <Route path="reconciliation" element={<Reconciliation />} />
             <Route path="configuration" element={<Configuration />} />
             <Route path="alerts" element={<Alerts />} />

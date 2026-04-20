@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, CircleMarker, Popup, Polyline, Polygon, Tooltip } from 'react-leaflet'
+import { Calendar, Filter, Sliders } from 'lucide-react'
 import { tollStations, corridors, corridorRoutes, geofenceZones, borderEntryPoints } from '@/lib/mock-data'
-import { SectionHeader } from '@/components/shared/section-header'
 import { StatusBadge } from '@/components/shared/status-badge'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+
+function HeaderButton({ children, icon: Icon }: { children: React.ReactNode; icon?: typeof Filter }) {
+  return (
+    <button className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground/80 shadow-sm transition-colors hover:bg-muted/50">
+      {Icon && <Icon className="size-3.5" />}
+      {children}
+    </button>
+  )
+}
 
 type Station = { id: string; name: string; corridor: string; devices: number; lat: number; lng: number }
 
@@ -47,10 +56,25 @@ export default function GeoMap() {
   }
 
   return (
-    <div className="relative">
-      <SectionHeader title="Geo Map & Toll Config" description="Interactive map of Kampala toll infrastructure" />
+    <div className="space-y-8">
+      {/* Page header */}
+      <header className="border-b border-border pb-6">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Geo Map & Toll Config</h1>
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              Interactive map of Kampala toll infrastructure, corridors, geofences, and border points
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <HeaderButton icon={Calendar}>18 Apr 2025</HeaderButton>
+            <HeaderButton icon={Filter}>Layers</HeaderButton>
+            <HeaderButton icon={Sliders}>Tweaks</HeaderButton>
+          </div>
+        </div>
+      </header>
 
-      <div className="relative h-[calc(100vh-8rem)] rounded-lg border border-border overflow-hidden">
+      <div className="relative h-[calc(100vh-16rem)] rounded-lg border border-border overflow-hidden">
         <MapContainer center={[0.3476, 32.5825]} zoom={12} className="h-full w-full z-0" scrollWheelZoom>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>' />
 

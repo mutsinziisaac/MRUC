@@ -8,7 +8,6 @@ const pageTitles: Record<string, string> = {
   "/compliance": "Compliance & Enforcement",
   "/geo-map": "Geo Map & Toll Config",
   "/transit": "Transit Management",
-  "/vehicles": "Vehicle Registry",
   "/reconciliation": "Financial Reconciliation",
   "/configuration": "Configuration",
   "/alerts": "Alerts & Audit Trail",
