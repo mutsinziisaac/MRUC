@@ -116,7 +116,6 @@ function CardHeader({ title, description, action }: { title: string; description
 const inTransit = activeTrips.filter((t) => t.status === "in-transit").length
 const completed = activeTrips.filter((t) => t.status === "completed").length
 const autoTerminatedCount = activeTrips.filter((t) => t.status === "auto-terminated").length
-const qrIssues = activeTrips.filter((t) => t.qrStatus !== "valid").length
 const validQR = qrValidationLogs.filter((q) => q.result === "valid").length
 const qrSuccessRate = (validQR / qrValidationLogs.length) * 100
 
