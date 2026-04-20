@@ -6,7 +6,6 @@ import Login from "@/pages/login"
 import Overview from "@/pages/overview"
 import RevenueAnalytics from "@/pages/revenue-analytics"
 import Compliance from "@/pages/compliance"
-import Operations from "@/pages/operations"
 import Configuration from "@/pages/configuration"
 import Alerts from "@/pages/alerts"
 import GeoMap from "@/pages/geo-map"
@@ -27,7 +26,6 @@ export default function App() {
             <Route index element={<Overview />} />
             <Route path="revenue" element={<RevenueAnalytics />} />
             <Route path="compliance" element={<Compliance />} />
-            <Route path="operations" element={<Operations />} />
             <Route path="geo-map" element={<GeoMap />} />
             <Route path="transit" element={<Transit />} />
             <Route path="vehicles" element={<Vehicles />} />
