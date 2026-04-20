@@ -5,7 +5,7 @@ import { StatusBadge } from "@/components/shared/status-badge"
 import { BarChart, Bar, COLORS, Legend } from "@/components/shared/chart-wrappers"
 import {
   activeTrips, qrValidationLogs, geofenceEvents,
-  emptyTruckDetections, sctCargoShipments, fmtMZN,
+  emptyTruckDetections, sctCargoShipments, fmtUGX,
 } from "@/lib/mock-data"
 
 const statusCounts = {
@@ -137,7 +137,7 @@ export default function Transit() {
                     <div className="text-xs text-muted-foreground">{e.detectedAt} · {e.asycudaRef}</div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium">{fmtMZN(e.amount)}</span>
+                    <span className="text-xs font-medium">{fmtUGX(e.amount)}</span>
                     <StatusBadge status={e.chargeStatus} />
                   </div>
                 </div>

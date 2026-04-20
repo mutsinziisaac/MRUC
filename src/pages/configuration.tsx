@@ -84,7 +84,7 @@ export default function Configuration() {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Tariff Bands */}
-        <ConfigCard title="Tariff Bands & Charge Categories" description="Current active toll rates by vehicle class" lastUpdated="Last updated by Gov. A. Mondlane on 17 Apr 2025" onEdit={() => setEditModal("tariffs")}>
+        <ConfigCard title="Tariff Bands & Charge Categories" description="Current active toll rates by vehicle class" lastUpdated="Last updated by Dir. G. Akello on 17 Apr 2025" onEdit={() => setEditModal("tariffs")}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -107,7 +107,7 @@ export default function Configuration() {
         </ConfigCard>
 
         {/* Exemptions */}
-        <ConfigCard title="Exemptions & Special Classes" description="Active exemption categories and approval authority" lastUpdated="Last reviewed by L. Cossa on 16 Apr 2025" onEdit={() => setEditModal("exemptions")}>
+        <ConfigCard title="Exemptions & Special Classes" description="Active exemption categories and approval authority" lastUpdated="Last reviewed by M. Okello on 16 Apr 2025" onEdit={() => setEditModal("exemptions")}>
           <div className="space-y-2.5">
             {exemptions.map((e) => (
               <div key={e.name} className="flex items-center justify-between">
@@ -123,7 +123,7 @@ export default function Configuration() {
         </ConfigCard>
 
         {/* Alert Thresholds */}
-        <ConfigCard title="Alert Thresholds" description="Automated alert trigger conditions" lastUpdated="Last modified by S. Nhaca on 18 Apr 2025" onEdit={() => setEditModal("thresholds")}>
+        <ConfigCard title="Alert Thresholds" description="Automated alert trigger conditions" lastUpdated="Last modified by S. Nakato on 18 Apr 2025" onEdit={() => setEditModal("thresholds")}>
           <div className="space-y-3">
             {thresholds.map((t) => (
               <div key={t.name} className="flex items-center justify-between">
@@ -153,7 +153,7 @@ export default function Configuration() {
         </ConfigCard>
 
         {/* Payment Channel Toggles — no edit button */}
-        <ConfigCard title="Payment Channel Availability" description="Enable or disable payment methods across all toll points" lastUpdated="Last toggled by S. Nhaca on 16 Apr 2025">
+        <ConfigCard title="Payment Channel Availability" description="Enable or disable payment methods across all toll points" lastUpdated="Last toggled by S. Nakato on 16 Apr 2025">
           <div className="space-y-3">
             {paymentChannels.map((c) => (
               <div key={c.id} className="flex items-center justify-between">
@@ -172,7 +172,7 @@ export default function Configuration() {
         </ConfigCard>
 
         {/* Reporting Cadence */}
-        <ConfigCard title="Reporting Cadence" description="Executive report schedule and delivery preferences" lastUpdated="Last configured by J. Macamo on 14 Apr 2025" onEdit={() => setEditModal("reporting")}>
+        <ConfigCard title="Reporting Cadence" description="Executive report schedule and delivery preferences" lastUpdated="Last configured by D. Ssekitoleko on 14 Apr 2025" onEdit={() => setEditModal("reporting")}>
           <div className="space-y-3">
             {reporting.map((r) => (
               <div key={r.name} className="flex items-center justify-between">
@@ -184,7 +184,7 @@ export default function Configuration() {
               </div>
             ))}
           </div>
-          <div className="mt-2 text-xs text-muted-foreground">Delivery: Portal + Email · Recipients: Governor's Office, Finance Director</div>
+          <div className="mt-2 text-xs text-muted-foreground">Delivery: Portal + Email · Recipients: KCCA Leadership, Finance Director</div>
         </ConfigCard>
       </div>
 

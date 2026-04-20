@@ -12,7 +12,7 @@ type Station = { id: string; name: string; corridor: string; devices: number; la
 
 const CORRIDOR_COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4']
 
-const emptyStation: Station = { id: '', name: '', corridor: '', devices: 0, lat: -25.97, lng: 32.57 }
+const emptyStation: Station = { id: '', name: '', corridor: '', devices: 0, lat: 0.3476, lng: 32.5825 }
 
 export default function GeoMap() {
   const [stations, setStations] = useState<Station[]>(tollStations)
@@ -48,10 +48,10 @@ export default function GeoMap() {
 
   return (
     <div className="relative">
-      <SectionHeader title="Geo Map & Toll Config" description="Interactive map of Maputo toll infrastructure" />
+      <SectionHeader title="Geo Map & Toll Config" description="Interactive map of Kampala toll infrastructure" />
 
       <div className="relative h-[calc(100vh-8rem)] rounded-lg border border-border overflow-hidden">
-        <MapContainer center={[-25.97, 32.57]} zoom={12} className="h-full w-full z-0" scrollWheelZoom>
+        <MapContainer center={[0.3476, 32.5825]} zoom={12} className="h-full w-full z-0" scrollWheelZoom>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>' />
 
           {corridorRoutes.map(r => (
