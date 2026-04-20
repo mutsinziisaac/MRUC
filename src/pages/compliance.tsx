@@ -1,4 +1,4 @@
-import { ArrowUpRight, ArrowDownRight, Minus, Calendar, Filter, Sliders, MapPin, ChevronRight } from "lucide-react"
+import { ArrowUpRight, ArrowDownRight, Minus, Calendar, Filter, Sliders, ChevronRight } from "lucide-react"
 import {
   ResponsiveContainer,
   AreaChart as RArea,
@@ -44,8 +44,6 @@ const sparkViolations = [1830, 1755, 1820, 1680, 1735, 1610, 1670, 1545, 1490]
 const sparkResolution = [78.2, 79.5, 78.8, 81.2, 80.5, 82.4, 81.8, 83.5, 84.3]
 const sparkCoverage = [88.5, 89.8, 87.9, 90.5, 89.2, 91.4, 90.6, 91.8, 92.1]
 
-const hotspots = [...corridorPerformance].sort((a, b) => a.compliance - b.compliance).slice(0, 5)
-
 const violationTypes = violationsByType.map((v) => v.type)
 const heatmapCorridors = corridorPerformance.slice(0, 6)
 const heatmapColors = ["#e8efe6", "#c5d8c1", "#8fb591", "#5b8e6c", "#3a6e54"]
@@ -84,12 +82,6 @@ const sevStyles: Record<string, { bar: string; pill: string }> = {
   medium:   { bar: "bg-teal-600",  pill: "bg-teal-50 text-teal-700 ring-teal-200" },
   low:      { bar: "bg-slate-400", pill: "bg-slate-50 text-slate-700 ring-slate-200" },
 }
-
-const priorityActions = [
-  { corridor: "Bombo Road", trend: -3.2, action: "Increase enforcement presence; review exemption claims for anomalies." },
-  { corridor: "Masaka Road", trend: -1.8, action: "Audit exemption spike at Busega Plaza; freeze new claims pending review." },
-  { corridor: "Jinja Road", trend: -0.9, action: "Address staffing gap at Nakawa checkpoint; reassign Echo unit temporarily." },
-]
 
 const maxViolationCount = Math.max(...violationsByType.map((v) => v.count))
 
@@ -381,45 +373,8 @@ export default function Compliance() {
         </div>
       </section>
 
-      {/* Evasion Hotspots + Enforcement Teams */}
-      <section className="animate-in-section grid gap-5 lg:grid-cols-2" style={{ animationDelay: "0.18s" }}>
-        {/* Evasion Hotspots */}
-        <div className="overflow-hidden rounded-xl border border-border bg-card">
-          <CardHeader title="Evasion Hotspots" description="Corridors with the lowest compliance scores" />
-          <ul className="divide-y divide-border">
-            {hotspots.map((c, i) => {
-              const t = complianceTone(c.compliance)
-              return (
-                <li key={c.id} className="px-5 py-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-muted text-[11px] font-semibold text-muted-foreground">
-                        {i + 1}
-                      </div>
-                      <div className="min-w-0">
-                        <div className="truncate text-sm font-semibold">{c.name}</div>
-                        <div className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">
-                          <MapPin className="size-3" />
-                          {c.district}
-                          <span className="mx-1 text-muted-foreground/60">·</span>
-                          {c.violations} violations
-                        </div>
-                      </div>
-                    </div>
-                    <span className={cn("rounded-md px-2 py-0.5 text-xs font-semibold ring-1", t.pill)}>
-                      {c.compliance}%
-                    </span>
-                  </div>
-                  <div className="mt-3 h-1 overflow-hidden rounded-full bg-muted">
-                    <div className={cn("h-full rounded-full", t.bar)} style={{ width: `${c.compliance}%` }} />
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-
-        {/* Enforcement Teams */}
+      {/* Enforcement Teams */}
+      <section className="animate-in-section" style={{ animationDelay: "0.18s" }}>
         <div className="overflow-hidden rounded-xl border border-border bg-card">
           <CardHeader
             title="Enforcement Team Performance"
@@ -473,9 +428,8 @@ export default function Compliance() {
         </div>
       </section>
 
-      {/* Suspicious Activity + Priority Actions */}
-      <section className="animate-in-section grid gap-5 lg:grid-cols-2" style={{ animationDelay: "0.24s" }}>
-        {/* Suspicious Activity */}
+      {/* Suspicious Activity */}
+      <section className="animate-in-section" style={{ animationDelay: "0.24s" }}>
         <div className="overflow-hidden rounded-xl border border-border bg-card">
           <CardHeader title="Suspicious Activity" description="Patterns flagged for investigation" />
           <ul className="divide-y divide-border">
@@ -503,31 +457,6 @@ export default function Compliance() {
           </ul>
         </div>
 
-        {/* Priority Actions */}
-        <div className="overflow-hidden rounded-xl border border-border bg-card">
-          <CardHeader title="Priority Actions" description="Corridors with declining compliance — recommended interventions" />
-          <ul className="divide-y divide-border">
-            {priorityActions.map((a, i) => (
-              <li key={a.corridor} className="px-5 py-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-start gap-3 min-w-0">
-                    <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-rose-50 text-[11px] font-semibold text-rose-700 ring-1 ring-rose-200">
-                      {i + 1}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-sm font-semibold">{a.corridor}</div>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{a.action}</p>
-                    </div>
-                  </div>
-                  <span className="inline-flex shrink-0 items-center gap-0.5 rounded-md bg-rose-50 px-2 py-0.5 text-xs font-semibold text-rose-700 ring-1 ring-rose-200">
-                    <ArrowDownRight className="size-3" strokeWidth={2.5} />
-                    {Math.abs(a.trend).toFixed(1)}%
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
       </section>
     </div>
   )
