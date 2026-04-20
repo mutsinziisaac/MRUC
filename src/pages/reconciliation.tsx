@@ -5,7 +5,7 @@ import { StatusBadge } from "@/components/shared/status-badge"
 import { BarChart, Bar, LineChart, Line, COLORS, Legend } from "@/components/shared/chart-wrappers"
 import {
   reconciliationRecords, remittanceLog, bankGuarantee,
-  pppRevenueShare, asycudaIntegrationStatus, tenYearProjection, fmtMZN, fmtPct,
+  pppRevenueShare, asycudaIntegrationStatus, tenYearProjection, fmtUGX, fmtPct,
 } from "@/lib/mock-data"
 
 const matched = reconciliationRecords.filter((r) => r.status === "matched").length
@@ -22,20 +22,20 @@ export default function Reconciliation() {
     <div className="space-y-6">
       {/* KPI Band */}
       <section className="animate-in-section grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-        <KpiCard label="Remitted Today" value={fmtMZN(todayRemitted)} icon={DollarSign} />
+        <KpiCard label="Remitted Today" value={fmtUGX(todayRemitted)} icon={DollarSign} />
         <KpiCard label="Pending Reconciliation" value={String(pending)} icon={Clock} />
-        <KpiCard label="Bank Guarantee" value={fmtMZN(bankGuarantee.available)} icon={Shield} />
-        <KpiCard label="Municipality Share 75%" value={fmtMZN(latest.municipalityShare)} icon={Building} />
-        <KpiCard label="BSMART Share 25%" value={fmtMZN(latest.bsmartShare)} icon={Briefcase} />
+        <KpiCard label="Bank Guarantee" value={fmtUGX(bankGuarantee.available)} icon={Shield} />
+        <KpiCard label="KCCA Share 75%" value={fmtUGX(latest.municipalityShare)} icon={Building} />
+        <KpiCard label="BSMART Share 25%" value={fmtUGX(latest.bsmartShare)} icon={Briefcase} />
         <KpiCard label="Reconciliation Rate" value={fmtPct(reconRate)} icon={CheckCircle} />
       </section>
 
       {/* Charts Row */}
       <section className="animate-in-section grid gap-4 lg:grid-cols-2" style={{ animationDelay: "0.1s" }}>
         <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-          <SectionHeader title="PPP Revenue Share" description="Monthly municipality vs BSMART split" />
+          <SectionHeader title="PPP Revenue Share" description="Monthly KCCA vs BSMART split" />
           <BarChart data={pppRevenueShare.map((d) => ({ name: d.month, municipalityShare: d.municipalityShare, bsmartShare: d.bsmartShare }))}>
-            <Bar dataKey="municipalityShare" stackId="a" fill={COLORS.primary} barSize={20} name="Municipality (75%)" />
+            <Bar dataKey="municipalityShare" stackId="a" fill={COLORS.primary} barSize={20} name="KCCA (75%)" />
             <Bar dataKey="bsmartShare" stackId="a" fill={COLORS.gold} radius={[2, 2, 0, 0]} barSize={20} name="BSMART (25%)" />
             <Legend iconSize={8} wrapperStyle={{ fontSize: 11 }} />
           </BarChart>
@@ -45,7 +45,7 @@ export default function Reconciliation() {
           <SectionHeader title="10-Year Revenue Projection" description="Projected revenue with PPP split" />
           <LineChart data={tenYearProjection.map((d) => ({ month: String(d.year), ...d }))}>
             <Line type="monotone" dataKey="projected" stroke={COLORS.primary} strokeWidth={2} dot={{ r: 3 }} name="Projected" />
-            <Line type="monotone" dataKey="municipalityShare" stroke={COLORS.success} strokeWidth={2} dot={{ r: 3 }} name="Municipality" />
+            <Line type="monotone" dataKey="municipalityShare" stroke={COLORS.success} strokeWidth={2} dot={{ r: 3 }} name="KCCA" />
             <Line type="monotone" dataKey="bsmartShare" stroke={COLORS.gold} strokeWidth={2} dot={{ r: 3 }} name="BSMART" />
             <Legend iconSize={8} wrapperStyle={{ fontSize: 11 }} />
           </LineChart>
@@ -59,9 +59,9 @@ export default function Reconciliation() {
           <SectionHeader title="Bank Guarantee Status" />
           <div className="space-y-3 text-sm">
             <div className="flex justify-between"><span className="text-muted-foreground">Provider</span><span className="font-medium">{bankGuarantee.provider}</span></div>
-            <div className="flex justify-between"><span className="text-muted-foreground">Total Amount</span><span className="font-medium">{fmtMZN(bankGuarantee.amount)}</span></div>
-            <div className="flex justify-between"><span className="text-muted-foreground">Utilized</span><span className="font-medium">{fmtMZN(bankGuarantee.utilized)}</span></div>
-            <div className="flex justify-between"><span className="text-muted-foreground">Available</span><span className="font-medium">{fmtMZN(bankGuarantee.available)}</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Total Amount</span><span className="font-medium">{fmtUGX(bankGuarantee.amount)}</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Utilized</span><span className="font-medium">{fmtUGX(bankGuarantee.utilized)}</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Available</span><span className="font-medium">{fmtUGX(bankGuarantee.available)}</span></div>
             <div>
               <div className="mb-1 flex justify-between text-xs"><span className="text-muted-foreground">Utilization</span><span>{fmtPct(utilizationPct)}</span></div>
               <div className="h-2 rounded-full bg-muted"><div className="h-2 rounded-full bg-primary" style={{ width: `${utilizationPct}%` }} /></div>
@@ -94,7 +94,7 @@ export default function Reconciliation() {
                   <div className="text-xs text-muted-foreground">{r.channel} · {r.timestamp}</div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="text-sm font-medium">{fmtMZN(r.amount)}</div>
+                  <div className="text-sm font-medium">{fmtUGX(r.amount)}</div>
                   <StatusBadge status={r.status} />
                 </div>
               </div>
@@ -123,9 +123,9 @@ export default function Reconciliation() {
                 {reconciliationRecords.map((r) => (
                   <tr key={r.id} className="border-b border-border/50">
                     <td className="py-2 font-medium">{r.date}</td>
-                    <td className="py-2 text-right">{fmtMZN(r.expected)}</td>
-                    <td className="py-2 text-right">{fmtMZN(r.actual)}</td>
-                    <td className={`py-2 text-right font-medium ${r.variance < 0 ? "text-destructive" : ""}`}>{fmtMZN(r.variance)}</td>
+                    <td className="py-2 text-right">{fmtUGX(r.expected)}</td>
+                    <td className="py-2 text-right">{fmtUGX(r.actual)}</td>
+                    <td className={`py-2 text-right font-medium ${r.variance < 0 ? "text-destructive" : ""}`}>{fmtUGX(r.variance)}</td>
                     <td className="py-2">{r.channel}</td>
                     <td className="py-2 text-right"><StatusBadge status={r.status} /></td>
                   </tr>

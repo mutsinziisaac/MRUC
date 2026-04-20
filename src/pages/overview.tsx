@@ -4,7 +4,7 @@ import { SectionHeader } from "@/components/shared/section-header"
 import { AlertCard } from "@/components/shared/alert-card"
 import { AuditTimeline } from "@/components/shared/audit-timeline"
 import { AreaChart, BarChart, Area, Bar, COLORS, Legend } from "@/components/shared/chart-wrappers"
-import { kpis, monthlyRevenue, corridorPerformance, channelMix, alerts, auditTrail, fmtMZN, fmtPct } from "@/lib/mock-data"
+import { kpis, monthlyRevenue, corridorPerformance, channelMix, alerts, auditTrail, fmtUGX, fmtPct } from "@/lib/mock-data"
 
 const topStations = corridorPerformance.sort((a, b) => b.collected / b.target - a.collected / a.target)
 const topPerformers = topStations.slice(0, 4)
@@ -15,8 +15,8 @@ export default function Overview() {
     <div className="space-y-6">
       {/* Hero KPI Band */}
       <section className="animate-in-section grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-        <KpiCard label="Revenue Today" value={fmtMZN(kpis.revenueToday)} delta={3.2} deltaLabel="vs yesterday" icon={DollarSign} />
-        <KpiCard label="Month-to-Date" value={fmtMZN(kpis.revenueMTD)} delta={7.1} deltaLabel="vs last month" icon={CalendarDays} />
+        <KpiCard label="Revenue Today" value={fmtUGX(kpis.revenueToday)} delta={3.2} deltaLabel="vs yesterday" icon={DollarSign} />
+        <KpiCard label="Month-to-Date" value={fmtUGX(kpis.revenueMTD)} delta={7.1} deltaLabel="vs last month" icon={CalendarDays} />
         <KpiCard label="Collection Efficiency" value={fmtPct(kpis.collectionEfficiency)} delta={1.4} deltaLabel="vs prior period" icon={Target} />
         <KpiCard label="Compliance Rate" value={fmtPct(kpis.complianceRate)} delta={-0.8} deltaLabel="vs last month" icon={ShieldCheck} />
         <KpiCard label="System Uptime" value={fmtPct(kpis.systemUptime)} delta={0.02} deltaLabel="30-day" icon={Wifi} />
@@ -26,7 +26,7 @@ export default function Overview() {
       {/* Revenue vs Target */}
       <section className="animate-in-section" style={{ animationDelay: "0.1s" }}>
         <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-          <SectionHeader title="Revenue vs Target" description="Monthly actual collections against target (MZN)" />
+          <SectionHeader title="Revenue vs Target" description="Monthly actual collections against target (UGX)" />
           <AreaChart data={monthlyRevenue}>
             <Area type="monotone" dataKey="target" stroke={COLORS.muted} fill="transparent" strokeDasharray="4 4" name="Target" />
             <Area type="monotone" dataKey="actual" stroke={COLORS.primary} fill={COLORS.primary} fillOpacity={0.1} name="Actual" />
@@ -110,14 +110,14 @@ export default function Overview() {
             </p>
             <p>
               Revenue collections are trending <span className="font-semibold text-success">+7.1% month-over-month</span>,
-              driven by strong M-Pesa adoption and improved enforcement coverage on EN1 corridors.
+              driven by strong MTN MoMo adoption and improved enforcement coverage on Kampala arterial corridors.
             </p>
             <p className="text-destructive/90">
-              <span className="font-semibold">Attention needed:</span> Compliance at EN4 Machava has dropped below the 85% policy floor
-              for 3 consecutive days. Exemption claims at Circular West show anomalous patterns requiring audit.
+              <span className="font-semibold">Attention needed:</span> Compliance on Bombo Road has dropped below the 85% policy floor
+              for 3 consecutive days. Exemption claims at Busega Plaza show anomalous patterns requiring audit.
             </p>
             <p className="text-muted-foreground">
-              System uptime remains excellent at {fmtPct(kpis.systemUptime)}. One ANPR camera at Matola is under maintenance.
+              System uptime remains excellent at {fmtPct(kpis.systemUptime)}. One ANPR camera at Namanve is under maintenance.
             </p>
           </div>
         </div>

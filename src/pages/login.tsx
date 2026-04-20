@@ -22,14 +22,14 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
       <div className="hidden lg:flex lg:w-[480px] flex-col justify-between p-10" style={{ background: "oklch(0.18 0.04 220)" }}>
         <div>
           <div className="mb-16">
-              <div className="font-semibold text-[15px] text-white/90 leading-tight">MRUC</div>
+              <div className="font-semibold text-[15px] text-white/90 leading-tight">RUC</div>
               <div className="text-[11px] text-white/50 leading-tight">Unified Road Revenue Platform</div>
           </div>
           <h1 className="text-[28px] font-bold text-white/95 leading-tight mb-4">
             Unified Road User Charge<br />& Toll Management System
           </h1>
           <p className="text-sm text-white/50 leading-relaxed max-w-[340px]">
-            Centralised oversight of toll collections, compliance enforcement, and revenue reconciliation across all Maputo Municipality corridors.
+            Centralised oversight of toll collections, compliance enforcement, and revenue reconciliation across Kampala Capital City corridors.
           </p>
           <img src="/Meeting.svg" alt="Team collaboration" className="mt-8 w-full max-w-[360px] opacity-80" />
         </div>
@@ -49,7 +49,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
           </div>
           <div className="flex items-center gap-2 text-[11px] text-white/30">
             <ShieldCheck className="size-3.5" />
-            <span>Secured by BSMART Technology · Município de Maputo</span>
+            <span>Secured by BSMART Technology · Kampala Capital City Authority</span>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
         <div className="w-full max-w-[380px]">
           {/* Mobile branding */}
           <div className="mb-8 lg:hidden">
-              <div className="font-semibold text-sm leading-tight">MRUC</div>
+              <div className="font-semibold text-sm leading-tight">RUC</div>
               <div className="text-[11px] text-muted-foreground leading-tight">Unified Road Revenue Platform</div>
           </div>
 
@@ -71,7 +71,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
               <label className="block text-xs font-medium text-muted-foreground mb-1.5">Email Address</label>
               <input
                 type="email"
-                placeholder="name@maputo.gov.mz"
+                placeholder="name@kcca.go.ug"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="h-10 w-full rounded-lg border border-input bg-card px-3 text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring transition-colors"

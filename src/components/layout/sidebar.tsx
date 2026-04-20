@@ -34,7 +34,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
       {/* Branding */}
       <div className="px-5 py-5">
           <div className="font-semibold text-sm text-sidebar-foreground leading-tight">
-            MRUC
+            RUC
           </div>
           <div className="text-[11px] text-sidebar-foreground/60 leading-tight">
             Unified Road Revenue Platform
@@ -70,10 +70,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
       {/* Footer */}
       <div className="border-t border-sidebar-border px-5 py-4">
         <div className="text-[11px] text-sidebar-foreground/40">
-          Município de Maputo
+          Kampala Capital City Authority
         </div>
         <div className="text-[11px] text-sidebar-foreground/40">
-          MRUC Platform v2.1
+          RUC Platform v2.1
         </div>
       </div>
     </div>

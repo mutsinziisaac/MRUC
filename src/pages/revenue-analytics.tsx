@@ -6,7 +6,7 @@ import { AreaChart, BarChart, LineChart, Area, Bar, Line, COLORS, Legend } from 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   dailyRevenue, monthlyRevenue, corridorPerformance, channelMix,
-  revenueByStream, hourlyThroughput, forecast, kpis, fmtMZN, fmtPct,
+  revenueByStream, hourlyThroughput, forecast, kpis, fmtUGX, fmtPct,
 } from "@/lib/mock-data"
 
 const weeklyRevenue = dailyRevenue.reduce<{ week: string; value: number }[]>((acc, d, i) => {
@@ -46,16 +46,16 @@ export default function RevenueAnalytics() {
 
       {/* KPI row */}
       <section className="animate-in-section grid grid-cols-2 gap-3 md:grid-cols-4">
-        <KpiCard label="Year-to-Date" value={fmtMZN(kpis.revenueYTD)} delta={11.3} deltaLabel="vs prior year" icon={DollarSign} />
+        <KpiCard label="Year-to-Date" value={fmtUGX(kpis.revenueYTD)} delta={11.3} deltaLabel="vs prior year" icon={DollarSign} />
         <KpiCard label="Collection Efficiency" value={fmtPct(kpis.collectionEfficiency)} delta={1.4} deltaLabel="vs target" icon={TrendingUp} />
-        <KpiCard label="Avg Transaction" value={`${kpis.avgTransactionValue} MZN`} delta={2.1} deltaLabel="vs last month" icon={Clock} />
+        <KpiCard label="Avg Transaction" value={fmtUGX(kpis.avgTransactionValue)} delta={2.1} deltaLabel="vs last month" icon={Clock} />
         <KpiCard label="Leakage Risk" value="4.8%" delta={-1.2} deltaLabel="improving" icon={AlertTriangle} />
       </section>
 
       {/* Time-series + Actual vs Target */}
       <section className="animate-in-section grid gap-4 lg:grid-cols-2" style={{ animationDelay: "0.1s" }}>
         <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-          <SectionHeader title="Collection Trend" description={`${period.charAt(0).toUpperCase() + period.slice(1)} revenue collections (MZN)`} />
+          <SectionHeader title="Collection Trend" description={`${period.charAt(0).toUpperCase() + period.slice(1)} revenue collections (UGX)`} />
           <AreaChart data={chartData}>
             {period === "monthly" && <Area type="monotone" dataKey="target" stroke={COLORS.muted} fill="transparent" strokeDasharray="4 4" name="Target" />}
             <Area type="monotone" dataKey="actual" stroke={COLORS.primary} fill={COLORS.primary} fillOpacity={0.1} name="Actual" />
@@ -64,7 +64,7 @@ export default function RevenueAnalytics() {
         </div>
 
         <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-          <SectionHeader title="Actual vs Target by Corridor" description="Collection performance against targets (MZN)" />
+          <SectionHeader title="Actual vs Target by Corridor" description="Collection performance against targets (UGX)" />
           <BarChart data={corridorPerformance.map((c) => ({ name: c.name, Target: c.target, Collected: c.collected }))} layout="vertical" height={260}>
             <Bar dataKey="Target" fill={COLORS.muted} radius={[0, 2, 2, 0]} barSize={8} />
             <Bar dataKey="Collected" fill={COLORS.primary} radius={[0, 2, 2, 0]} barSize={8} />

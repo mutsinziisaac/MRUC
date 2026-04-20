@@ -22,16 +22,16 @@ const hotspots = corridorPerformance.map((c) => ({
 })).sort((a, b) => a.compliance - b.compliance)
 
 const suspiciousCards = [
-  { title: "Exemption spike at Circular West", desc: "340% increase in exemption claims over 48 hours. Pattern inconsistent with historical baseline.", severity: "critical" as const },
-  { title: "Repeated toll evasion — EN1 Sul secondary", desc: "Same 12 vehicle plates flagged 3+ times in 7 days. Possible organized evasion.", severity: "high" as const },
-  { title: "Overweight detections up at Marracuene", desc: "23% month-over-month increase. Correlates with new construction project traffic.", severity: "medium" as const },
-  { title: "Cash reconciliation gap — Marginal Coastal", desc: "8.2% variance between vehicle count and cash receipts. Under investigation.", severity: "medium" as const },
+  { title: "Exemption spike at Busega Plaza", desc: "340% increase in exemption claims over 48 hours. Pattern inconsistent with historical baseline.", severity: "critical" as const },
+  { title: "Repeated toll evasion at Kampala CBD Secondary", desc: "Same 12 vehicle plates flagged 3+ times in 7 days. Possible organized evasion.", severity: "high" as const },
+  { title: "Overweight detections up at Kajjansi", desc: "23% month-over-month increase. Correlates with new construction project traffic.", severity: "medium" as const },
+  { title: "Cash reconciliation gap at Gayaza Road Gate", desc: "8.2% variance between vehicle count and cash receipts. Under investigation.", severity: "medium" as const },
 ]
 
 const priorityActions = [
-  { corridor: "EN4 Machava", trend: -3.2, action: "Increase enforcement presence; review exemption claims" },
-  { corridor: "Circular de Maputo", trend: -1.8, action: "Audit exemption spike; freeze new claims pending review" },
-  { corridor: "EN1 Sul", trend: -0.9, action: "Address staffing gap at secondary checkpoint" },
+  { corridor: "Bombo Road", trend: -3.2, action: "Increase enforcement presence; review exemption claims" },
+  { corridor: "Masaka Road", trend: -1.8, action: "Audit exemption spike; freeze new claims pending review" },
+  { corridor: "Jinja Road", trend: -0.9, action: "Address staffing gap at Nakawa checkpoint" },
 ]
 
 export default function Compliance() {

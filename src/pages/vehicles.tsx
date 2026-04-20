@@ -4,7 +4,7 @@ import { KpiCard } from "@/components/shared/kpi-card"
 import { SectionHeader } from "@/components/shared/section-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { BarChart, Bar, COLORS, Legend } from "@/components/shared/chart-wrappers"
-import { registeredVehicles, transporters, foreignVehiclesInMaputo, registrationTrend } from "@/lib/mock-data"
+import { registeredVehicles, transporters, foreignVehiclesInUganda, registrationTrend } from "@/lib/mock-data"
 
 export default function Vehicles() {
   const [search, setSearch] = useState("")
@@ -21,7 +21,7 @@ export default function Vehicles() {
 
   const pendingCount = registeredVehicles.filter(v => v.compliance === "pending").length
   const suspendedCount = registeredVehicles.filter(v => v.registrationStatus === "suspended").length
-  const foreignActive = foreignVehiclesInMaputo.filter(v => v.status !== "cleared").length
+  const foreignActive = foreignVehiclesInUganda.filter(v => v.status !== "cleared").length
 
   const complianceByClass = useMemo(() => {
     const map: Record<string, { name: string; compliant: number; "non-compliant": number; pending: number }> = {}
@@ -126,9 +126,9 @@ export default function Vehicles() {
           </div>
         </div>
 
-        {/* Foreign Vehicles in Maputo */}
+        {/* Foreign Vehicles in Uganda */}
         <div className="rounded-lg border border-border bg-card p-4 shadow-sm">
-          <h3 className="mb-3 text-sm font-semibold">Foreign Vehicles in Maputo</h3>
+          <h3 className="mb-3 text-sm font-semibold">Foreign Vehicles in Uganda</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-[11px]">
               <thead>
@@ -141,7 +141,7 @@ export default function Vehicles() {
                 </tr>
               </thead>
               <tbody>
-                {foreignVehiclesInMaputo.map(v => (
+                {foreignVehiclesInUganda.map(v => (
                   <tr key={v.id} className={`border-b border-border/50 last:border-0 ${v.status === "overstay" ? "bg-red-50/50" : ""}`}>
                     <td className="py-1.5 font-mono">{v.plate}</td>
                     <td className="py-1.5">{v.country}</td>
