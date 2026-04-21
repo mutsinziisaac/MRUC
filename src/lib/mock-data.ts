@@ -491,3 +491,13 @@ export const tenYearProjection = Array.from({ length: 10 }, (_, i) => {
     bsmartShare: Math.round(projected * 0.25),
   }
 })
+
+export const VEHICLE_CLASS_BRACKET: Record<'Class 1' | 'Class 2' | 'Class 3' | 'Class 4', string> = {
+  'Class 1': '≤ 3.5 t',
+  'Class 2': '3.5 – 7.5 t',
+  'Class 3': '7.5 – 16 t',
+  'Class 4': '> 16 t',
+}
+
+export const TIME_REGIMES = ['Day', 'Night', 'Weekend'] as const
+export type TimeRegime = typeof TIME_REGIMES[number]
